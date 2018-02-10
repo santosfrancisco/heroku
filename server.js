@@ -30,10 +30,8 @@ router.get('/', function(req, res) {
 });
 
 router.use(function(req, res, next) {
-    // do logging
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     console.log('Something is happening.');
     next(); // make sure we go to the next routes and don't stop here
@@ -46,16 +44,13 @@ router.route('/todos')
 // create a todo (accessed at POST http://localhost:8080/api/todos)
 .post(function(req, res) {
 
-        var todo = new Todo(); // create a new instance of the Todo model
-        todo.title = req.body.title; // set the todo title (comes from the request)
-        todo.completed = req.body.completed; // set the todo status (comes from the request)
-        todo.date = req.body.date; // Sets the date of creation of the todo
+        var todo = new Todo(req.body); // create a new instance of the Todo model
         // save the todo and check for errors
         todo.save(function(err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Todo created!' }); // success
+            res.json(todo); // success
         });
 
     })
@@ -94,7 +89,7 @@ router.route('/todos/:todo_id')
                 if (err)
                     res.send(err);
 
-                res.json({ message: 'Todo updated!' });
+                res.json(todo);
             });
 
         });
