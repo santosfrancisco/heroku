@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yoshidf/node-api-lab.git"
+        "url": "https://github.com/yoshidf/heroku.git"
     },
     "author": "Francisco",
     "dependencies": {
